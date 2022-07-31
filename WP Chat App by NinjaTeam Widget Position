@@ -1,0 +1,18 @@
+.wa__btn_popup {
+    left: 30px !important;
+    right: unset !important;
+}
+.wa__popup_chat_box {
+    left: 30px !important;
+    right: unset !important;
+}
+
+.wa__btn_popup_txt {
+    left: 100% !important;
+    right: unset !important;
+}
+
+.wa__popup_chat_box.wa__pending.wa__active.wa__lauch {
+    left: 30px !important;
+    right: unset !important;
+}
