@@ -1,8 +1,8 @@
 <?php
 /*
 Plugin Name: Add Checkout Button Next to Add to Cart
-Description: Adds a "Purchase Now" button next to the Add to Cart button on WooCommerce product pages, directly adding the product to checkout. Adjusts layout for mobile.
-Version: 1.7
+Description: Adds a "Purchase Now" button next to the Add to Cart button on WooCommerce single product pages only, directly adding the product to checkout. Adjusts layout for mobile.
+Version: 1.8
 Author: VJRanga
 */
 
@@ -11,14 +11,20 @@ if (!defined('ABSPATH')) {
 }
 
 function add_checkout_button_next_to_cart() {
+    if (!is_product()) {
+        return;
+    }
     global $product;
     $checkout_url = wc_get_checkout_url() . '?add-to-cart=' . $product->get_id();
     echo '<a href="' . esc_url($checkout_url) . '" class="button checkout-button">Buy Now</a>';
 }
 add_action('woocommerce_after_add_to_cart_button', 'add_checkout_button_next_to_cart');
 
-// Enqueue CSS Styles
+// Enqueue CSS Styles only on single product pages
 function add_checkout_button_styles() {
+    if (!is_product()) {
+        return;
+    }
     echo '<style>
         .cart {
             display: flex;
@@ -27,22 +33,20 @@ function add_checkout_button_styles() {
             flex-wrap: nowrap;
         }
         .single_add_to_cart_button {
-            width: 40% !important;
+            width: 50% !important;
         }
         .checkout-button {
             background-color: var(--e-global-color-primary);
             color: white !important;
-            padding: 10px 20px;
+            padding: 10px 20px !important;
             border-radius: 30px;
             text-transform: uppercase;
             font-weight: bold;
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
+            display: inline-block;
             border: none;
-            font-size: 14px;
-            width: 60%;
             text-align: center;
+            font-size: 14px;
+            width: 40% !important;
         }
         .checkout-button:hover {
             background-color: var(--e-global-color-accent);
@@ -59,3 +63,4 @@ function add_checkout_button_styles() {
     </style>';
 }
 add_action('wp_head', 'add_checkout_button_styles');
+
