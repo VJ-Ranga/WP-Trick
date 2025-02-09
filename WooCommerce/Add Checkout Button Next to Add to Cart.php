@@ -1,7 +1,8 @@
+<?php
 /*
 Plugin Name: Add Checkout Button Next to Add to Cart
-Description: Adds a "Purchase Now" button next to the Add to Cart button on WooCommerce product pages, directly adding the product to checkout.
-Version: 1.5
+Description: Adds a "Purchase Now" button next to the Add to Cart button on WooCommerce product pages, directly adding the product to checkout. Adjusts layout for mobile.
+Version: 1.7
 Author: VJRanga
 */
 
@@ -31,18 +32,29 @@ function add_checkout_button_styles() {
         .checkout-button {
             background-color: var(--e-global-color-primary);
             color: white !important;
-            padding: 10px 20px !important;
+            padding: 10px 20px;
             border-radius: 30px;
             text-transform: uppercase;
             font-weight: bold;
-            display: inline-block;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
             border: none;
-			text-align: center;
             font-size: 14px;
-            width: 50% !important;
+            width: 60%;
+            text-align: center;
         }
-        .checkout-button:hover, .single_add_to_cart_button:hover {
+        .checkout-button:hover {
             background-color: var(--e-global-color-accent);
+        }
+        @media (max-width: 768px) {
+            .cart {
+                flex-direction: column;
+                gap: 5px;
+            }
+            .single_add_to_cart_button, .checkout-button {
+                width: 100% !important;
+            }
         }
     </style>';
 }
